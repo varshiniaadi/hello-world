@@ -1,8 +1,6 @@
 # .github/workflows/test_action.yaml
 name: Test Action
-on:
-  schedule:
-    - cron: '6 0 * * *' # Runs every 2 hours
+on: [push]
 
 jobs:
   get-num-square:
