@@ -19,28 +19,12 @@ jobs:
         # Use the API key secret
       - name: Use API Key
         run: echo ${{ secrets.API_KEY }}
-      # - name: Fetch num squared
-      #   id: get_square
-      #   uses: ./ # Uses an action in the root directory
-      #   # or use a released GitHub Action
-      #   # uses: shipyard/github-action/fetch-shipyard-env@1.0.0
-      #   with:
-      #     num: 12
-      # - name: Print the square
-      
-    
-      - name: Set input variable
-        id: set_input
-        run: echo "::set-input name=num::${{ github.event.client_payload.num }}"
-        if: github.event.client_payload.num != null
-
       - name: Fetch num squared
         id: get_square
-        uses: ./ # Use an action in the root directory
+        uses: ./ # Uses an action in the root directory
+        # or use a released GitHub Action
+        # uses: shipyard/github-action/fetch-shipyard-env@1.0.0
         with:
-          num: ${{ steps.set_input.outputs.num }} # Pass the input number to the action
-        
+          num: 12
       - name: Print the square
-        run: |
-          echo "Input number: ${{ steps.set_input.outputs.num }}"
-          echo "Square of the number: ${{ steps.get_square.outputs.num_squared }}"
+        run: echo "${{ steps.get_square.outputs.num_squared }}"
